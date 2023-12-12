@@ -28,15 +28,12 @@ class DTWSegmentation:
     
     
     #Determine Similarity Threshold 
-    def calculate_similarity_threshold_mean(self,image_array):
-        return np.nanmean(image_array)
+    def calculate_similarity_threshold_mean(self,image_series):
+        return np.array([np.nanmean(image_array) for image_array in image_series ])
     
-    def calculate_similarity_threshold_std(self,image_array):
-        return np.nanstd(image_array)
-    
-    
-    
-    
+    def calculate_similarity_threshold_std(self,image_series):
+        return np.array([np.nanmean(image_array) for image_array in image_series ])
+
     #Determine the Number and Location of the Seeds
     def is_pixel_valid_across_time_series(self,pixel, image_series):
         """Check if a pixel is not NaN in any image of the time series."""
@@ -54,10 +51,10 @@ class DTWSegmentation:
         
         return combined_edge
 
-    def select_seeds(self,image_series, num_seeds=10, min_distance=20):
+    def select_seeds_from_edges_time_series(self,image_series, num_seeds=10, min_distance=20):
         seeds_per_image=[]
         for image_ in image_series:
-            edge_image = find_edges(image_)# Edge detection on the first image, for example
+            edge_image = self.find_edges(image_)# Edge detection on the first image, for example
         
         
             # Flatten the edge image and sort by edge intensity
@@ -77,6 +74,7 @@ class DTWSegmentation:
             seeds_per_image.append(seeds)
 
         return seeds_per_image
+    
     
     #Identifies the neighboring pixels
     def find_neighbors(self,pixel, image_shape):
