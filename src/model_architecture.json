@@ -1,0 +1,1 @@
+{"nx": 364, "ny": 320, "nt": 8, "n_conv_layers": 2, "inference_only": false, "net_name": "default", "kernel_sizes": [[5, 5, 5], [5, 5, 5]], "n_filters": [16, 16], "learning_rate": 0.01, "n_conv_per_block": 2, "strides": [[2, 2, 2], [2, 2, 2]]}
